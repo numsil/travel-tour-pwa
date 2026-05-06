@@ -1,6 +1,6 @@
 {
-  "name": "투어 예약",
-  "short_name": "투어예약",
+  "name": "OVJIN TOUR",
+  "short_name": "OVJIN TOUR",
   "description": "여행사 투어 상품 예약 앱",
   "start_url": "/travel-tour-pwa/",
   "scope": "/travel-tour-pwa/",

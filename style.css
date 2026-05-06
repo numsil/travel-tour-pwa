@@ -96,9 +96,9 @@ main {
 }
 
 .arrow {
-  font-size: 1.1rem;
-  color: #1a56db;
-  font-weight: bold;
+  font-size: 1.4rem;
+  color: #9ca3af;
+  font-weight: 300;
   flex-shrink: 0;
 }
 

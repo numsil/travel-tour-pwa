@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#1a56db" />
+  <title>투어 예약</title>
+  <link rel="manifest" href="manifest.json" />
+  <link rel="apple-touch-icon" href="icons/icon-192.png" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <h1>✈️ 투어 예약</h1>
+    <p>원하시는 상품을 선택해주세요</p>
+  </header>
+
+  <main>
+    <section class="tour-group">
+      <h2>🏔️ 중부투어</h2>
+      <div class="card-grid">
+        <a class="card" href="https://example.com/jungbu-3n4d" target="_blank" rel="noopener">
+          <div class="card-icon">🗓️</div>
+          <div class="card-info">
+            <h3>중부투어 3박 4일</h3>
+            <p>상품 정보 확인하기</p>
+          </div>
+          <span class="arrow">→</span>
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('sw.js');
+    }
+  </script>
+</body>
+</html>

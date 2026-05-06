@@ -1,5 +1,5 @@
-const CACHE = 'tour-pwa-v2';
-const ASSETS = ['/', '/index.html', '/style.css', '/manifest.json'];
+const CACHE = 'tour-pwa-v3';
+const ASSETS = ['/travel-tour-pwa/', '/travel-tour-pwa/index.html', '/travel-tour-pwa/style.css', '/travel-tour-pwa/manifest.json'];
 
 self.addEventListener('install', e => {
   e.waitUntil(caches.open(CACHE).then(c => c.addAll(ASSETS)));

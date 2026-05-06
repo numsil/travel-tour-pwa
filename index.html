@@ -54,36 +54,53 @@
       navigator.serviceWorker.register('sw.js');
     }
 
-    let deferredPrompt;
     const installBtn = document.getElementById('installBtn');
     const installHint = document.getElementById('installHint');
+    const ua = navigator.userAgent;
 
-    // Android Chrome: 설치 프롬프트 캐치
-    window.addEventListener('beforeinstallprompt', (e) => {
-      e.preventDefault();
-      deferredPrompt = e;
-      installBtn.style.display = 'block';
-    });
-
-    installBtn.addEventListener('click', async () => {
-      if (deferredPrompt) {
-        deferredPrompt.prompt();
-        const { outcome } = await deferredPrompt.userChoice;
-        deferredPrompt = null;
-        if (outcome === 'accepted') {
-          installBtn.style.display = 'none';
-        }
-      } else {
-        // iOS 안내
-        installHint.textContent = 'Safari 하단 공유 버튼(□↑) → "홈 화면에 추가" 를 눌러주세요';
-        installHint.style.display = 'block';
-      }
-    });
+    const isKakao = ua.includes('KAKAOTALK');
+    const isInAppBrowser = isKakao || ua.includes('NAVER') || ua.includes('Instagram') || ua.includes('FB_IAB');
+    const isIOS = /iPhone|iPad|iPod/.test(ua);
+    const isInStandaloneMode = window.navigator.standalone === true;
 
     // 이미 설치된 경우 버튼 숨김
-    window.addEventListener('appinstalled', () => {
+    if (isInStandaloneMode) {
       installBtn.style.display = 'none';
-    });
+    }
+    // 카카오 등 인앱 브라우저
+    else if (isInAppBrowser) {
+      installBtn.textContent = '📲 앱으로 저장하기';
+      installBtn.addEventListener('click', () => {
+        installHint.innerHTML = '① 우측 하단 <b>···</b> 메뉴 또는 <b>공유</b> 버튼 클릭<br>② <b>Safari로 열기</b> 선택<br>③ Safari 하단 공유(□↑) → <b>홈 화면에 추가</b>';
+        installHint.style.display = 'block';
+      });
+    }
+    // iOS Safari
+    else if (isIOS) {
+      installBtn.addEventListener('click', () => {
+        installHint.innerHTML = 'Safari 하단 공유 버튼(□↑) →<br><b>"홈 화면에 추가"</b> 를 눌러주세요';
+        installHint.style.display = 'block';
+      });
+    }
+    // Android Chrome
+    else {
+      let deferredPrompt;
+      window.addEventListener('beforeinstallprompt', (e) => {
+        e.preventDefault();
+        deferredPrompt = e;
+      });
+      installBtn.addEventListener('click', async () => {
+        if (deferredPrompt) {
+          deferredPrompt.prompt();
+          const { outcome } = await deferredPrompt.userChoice;
+          deferredPrompt = null;
+          if (outcome === 'accepted') installBtn.style.display = 'none';
+        }
+      });
+      window.addEventListener('appinstalled', () => {
+        installBtn.style.display = 'none';
+      });
+    }
   </script>
 </body>
 </html>

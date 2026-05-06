@@ -69,10 +69,15 @@
     }
     // 카카오 등 인앱 브라우저
     else if (isInAppBrowser) {
-      installBtn.textContent = '📲 Safari에서 열기';
+      installBtn.textContent = isIOS ? '📲 Safari에서 열기' : '📲 Chrome에서 열기';
       installBtn.addEventListener('click', () => {
-        const safariUrl = 'safari-https://' + location.host + location.pathname;
-        location.href = safariUrl;
+        if (isIOS) {
+          location.href = 'safari-https://' + location.host + location.pathname;
+        } else {
+          const url = location.href;
+          location.href = 'intent://' + location.host + location.pathname +
+            '#Intent;scheme=https;action=android.intent.action.VIEW;end';
+        }
       });
     }
     // iOS Safari

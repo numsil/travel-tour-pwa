@@ -1,4 +1,4 @@
-const CACHE = 'tour-pwa-v1';
+const CACHE = 'tour-pwa-v2';
 const ASSETS = ['/', '/index.html', '/style.css', '/manifest.json'];
 
 self.addEventListener('install', e => {

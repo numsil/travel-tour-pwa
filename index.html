@@ -69,10 +69,10 @@
     }
     // 카카오 등 인앱 브라우저
     else if (isInAppBrowser) {
-      installBtn.textContent = '📲 앱으로 저장하기';
+      installBtn.textContent = '📲 Safari에서 열기';
       installBtn.addEventListener('click', () => {
-        installHint.innerHTML = '① 우측 하단 <b>···</b> 메뉴 또는 <b>공유</b> 버튼 클릭<br>② <b>Safari로 열기</b> 선택<br>③ Safari 하단 공유(□↑) → <b>홈 화면에 추가</b>';
-        installHint.style.display = 'block';
+        const safariUrl = 'safari-https://' + location.host + location.pathname;
+        location.href = safariUrl;
       });
     }
     // iOS Safari
